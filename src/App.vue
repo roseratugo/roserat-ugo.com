@@ -20,7 +20,7 @@ const projects = [
     sourceUrl: 'https://github.com/roseratugo/KUZ-24HDUCODE2025'
   },
   {
-    title: 'Générateur de planette par IA',
+    title: 'Générateur de planètes par IA',
     description: "Un générateur de planètes 3D low-poly propulsé par l'IA. Créez des mondes uniques à partir de simples descriptions textuelles !",
     imageUrl: '/projects/planetgenerator.png',
     demoUrl: 'https://planet-generator-lovat.vercel.app/',
