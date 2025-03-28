@@ -20,6 +20,13 @@ const projects = [
     sourceUrl: 'https://github.com/roseratugo/KUZ-24HDUCODE2025'
   },
   {
+    title: 'Générateur de planette par IA',
+    description: "Un générateur de planètes 3D low-poly propulsé par l'IA. Créez des mondes uniques à partir de simples descriptions textuelles !",
+    imageUrl: '/projects/planetgenerator.png',
+    demoUrl: 'https://planet-generator-lovat.vercel.app/',
+    sourceUrl: 'https://github.com/roseratugo/planet-generator'
+  },
+  {
     title: 'Now Playing Deezer',
     description: "Now Playing Deezer est une application qui affiche la chanson en cours de lecture depuis Deezer sur votre flux de streaming. Elle utilise playerctl pour récupérer les informations sur les chansons et l'API Spotify pour récupérer les pochettes d'album.",
     imageUrl: '/projects/nowplayingdeezer.png',
