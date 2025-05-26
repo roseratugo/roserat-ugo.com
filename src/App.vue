@@ -13,7 +13,7 @@ const scrollToSection = (sectionId) => {
 
 const projects = [
   {
-    title: 'KUZ - 24H DU CODE 2025 : Sujet Le Mans School Of AI',
+    title: 'KUZ - test 24H DU CODE 2025 : Sujet Le Mans School Of AI',
     description: "Ce projet a été créé dans le cadre du hackathon Les 24H du code 2025. Nous avons choisi le sujet proposé par Le Mans School of AI. L'objectif était de développer un assistant IA intelligent pour l'hôtel California du Mans, capable d'interagir avec les clients de manière naturelle et efficace.",
     imageUrl: '/projects/kuz.png',
     demoUrl: 'https://www.youtube.com/watch?v=IAd7BZcSHbs',
