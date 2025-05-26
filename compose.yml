@@ -1,0 +1,14 @@
+services:
+  portfolio:
+    image: ghcr.io/roserat-ugo/roserat-ugo.com:latest
+    deploy:
+      replicas: 1
+    labels:
+      - caddy=roserat-ugo.com
+      - caddy.reverse_proxy="{{upstreams 8080}}"
+    networks:
+      - caddy_network
+
+networks:
+  caddy_network:
+    external: true
