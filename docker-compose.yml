@@ -5,6 +5,8 @@ services:
     networks:
       - proxy_net
     restart: unless-stopped
+    ports:
+      - "55345:80"
 
 networks:
   proxy_net:
