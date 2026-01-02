@@ -1,9 +1,15 @@
 services:
   web:
-    image: ghcr.io/ugomusic/roserat-ugo.com:latest
+    image: ghcr.io/roseratugo/roserat-ugo.com:latest
     container_name: roserat-ugo-portfolio
+    networks:
+      - proxy_net
     restart: unless-stopped
     ports:
       - "3000:80"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
+
+networks:
+  proxy_net:
+    external: true
