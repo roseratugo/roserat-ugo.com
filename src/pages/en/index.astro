@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/home/Hero.astro';
+import { getCollection } from 'astro:content';
+
+const distinctions = await getCollection('distinctions');
+const latestDistinctions = distinctions
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title="Home"
+  description="Ugo ROSERAT - Passionate Web Developer based in Le Mans, France. Creator of Collectif Pixel and co-host of Pixel Podcast."
+>
+  <Hero />
+
+  <!-- About Section -->
+  <section class="section-padding bg-paper">
+    <div class="container-wide">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <!-- Left - Title -->
+        <div>
+          <span class="font-mono text-sm uppercase tracking-widest text-accent mb-4 block" data-animate="fade-up">
+            About
+          </span>
+          <h2 class="font-display text-headline text-ink mb-6" data-animate="fade-up" data-delay="0.1">
+            From graphic arts<br />
+            to code<span class="text-accent">.</span>
+          </h2>
+          <div class="accent-line mb-8" data-line-reveal></div>
+        </div>
+
+        <!-- Right - Content -->
+        <div class="space-y-6">
+          <p class="text-lg text-ink-light leading-relaxed" data-animate="fade-up" data-delay="0.2">
+            My atypical background blends <strong class="text-ink">artistic training</strong> (vocational certificates in signage) and <strong class="text-ink">software development</strong>. This dual expertise allows me to approach web projects with a unique sensitivity.
+          </p>
+          <p class="text-lg text-ink-light leading-relaxed" data-animate="fade-up" data-delay="0.3">
+            Currently <strong class="text-ink">Production, Communication & Software Development Manager</strong> at ACR Fers Aluminium, I combine creativity and technical rigor on a daily basis.
+          </p>
+          <a href="/en/about" class="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-wider text-ink mt-4 hover:text-accent transition-colors" data-animate="fade-up" data-delay="0.4">
+            Learn more
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services/Skills Section -->
+  <section class="section-padding bg-paper-warm">
+    <div class="container-wide">
+      <div class="text-center mb-16">
+        <span class="font-mono text-sm uppercase tracking-widest text-accent mb-4 block" data-animate="fade-up">
+          Skills
+        </span>
+        <h2 class="font-display text-headline text-ink" data-animate="fade-up" data-delay="0.1">
+          What I do<span class="text-accent">.</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8" data-stagger>
+        {[
+          {
+            num: '01',
+            title: 'Web Development',
+            desc: 'Design and development of modern, high-performance web applications tailored to real business needs.',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />',
+          },
+          {
+            num: '02',
+            title: 'UI/UX Design',
+            desc: 'Clean interfaces and intuitive user experiences, nurtured by my artistic background.',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />',
+          },
+          {
+            num: '03',
+            title: 'Business Solutions',
+            desc: 'Custom tools to optimize internal processes and improve productivity.',
+            icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />',
+          },
+        ].map((service) => (
+          <div class="group p-8 bg-paper border border-ink/5 hover:border-ink/20 transition-all duration-500 card-hover">
+            <span class="font-display text-5xl text-paper-dark block mb-6" style="-webkit-text-stroke: 1px var(--color-ink-muted);">
+              {service.num}
+            </span>
+            <div class="w-12 h-12 mb-6 text-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full" set:html={service.icon} />
+            </div>
+            <h3 class="font-display text-xl text-ink mb-3">
+              {service.title}
+            </h3>
+            <p class="text-ink-light leading-relaxed">
+              {service.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Distinctions Section -->
+  <section class="section-padding bg-ink">
+    <div class="container-wide">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+        <div>
+          <span class="font-mono text-sm uppercase tracking-widest text-accent mb-4 block" data-animate="fade-up">
+            Distinctions
+          </span>
+          <h2 class="font-display text-headline text-paper" data-animate="fade-up" data-delay="0.1">
+            Achievements<span class="text-accent">.</span>
+          </h2>
+        </div>
+        <a href="/en/distinctions" class="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-wider text-paper/60 hover:text-paper transition-colors" data-animate="fade-up" data-delay="0.2">
+          View all
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6" data-stagger>
+        {latestDistinctions.map((d, i) => (
+          <div
+            class="group p-6 border border-paper/10 hover:border-paper/30 hover:bg-paper/5 transition-all duration-500"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <span class:list={[
+                'px-3 py-1 font-mono text-xs uppercase',
+                d.data.type === 'winner' ? 'bg-accent text-paper' : 'bg-paper/10 text-paper',
+              ]}>
+                {d.data.type === 'winner' ? 'Winner' : d.data.type === 'mentor' ? 'Mentor' : d.data.type === 'organizer' ? 'Founder' : 'Participant'}
+              </span>
+              <span class="font-mono text-xs text-paper/40">
+                {new Date(d.data.date).getFullYear()}
+              </span>
+            </div>
+            <h3 class="font-display text-xl text-paper mb-2">
+              {d.data.event.en}
+            </h3>
+            <p class="text-paper/50 text-sm">
+              {d.data.description.en}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-padding bg-paper">
+    <div class="container-narrow text-center">
+      <h2 class="font-display text-headline text-ink mb-6" data-animate="fade-up">
+        Got a project in mind<span class="text-accent">?</span>
+      </h2>
+      <p class="text-lg text-ink-light mb-10 max-w-xl mx-auto" data-animate="fade-up" data-delay="0.1">
+        Whether it's to discuss an idea, a collaboration, or simply chat about web development.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4" data-animate="fade-up" data-delay="0.2">
+        <a href="/en/about" class="btn-primary">
+          <span>Contact me</span>
+        </a>
+        <a href="https://github.com/ugoroserat" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <span>GitHub</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

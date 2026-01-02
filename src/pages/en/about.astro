@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Discover Ugo ROSERAT's journey, a passionate web developer based in Le Mans, from graphic arts to code."
+>
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="label">About</span>
+      <h1 class="page-title">
+        From graphic arts<br />to code<span class="accent">.</span>
+      </h1>
+      <p class="page-intro">
+        I'm Ugo ROSERAT, a 23-year-old web developer based in Le Mans, France.
+        My atypical background combines artistic training and software development,
+        giving me a unique perspective on web projects.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="page-content">
+    <div class="container">
+      <div class="content-grid">
+        <!-- Main Content -->
+        <div class="main-content">
+          <div class="content-block">
+            <h2>My Journey</h2>
+            <p>
+              I started with an artistic background, earning a <strong>Vocational
+              Certificate in Graphic Signage and Decor</strong> (2018-2020) followed
+              by a <strong>Diploma in Arts and Crafts</strong> specializing in graphic
+              art and signage (2020-2022). This creative foundation gave me a particular
+              sensitivity for design and user experience.
+            </p>
+            <p>
+              In 2022, I began my transition to web development by joining
+              <strong>ekod</strong> through a work-study program at ACR Fers Aluminium.
+              I earned my Associate Degree in Web Development in 2024 and my Bachelor's
+              in Application Design in 2025.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>Today</h2>
+            <p>
+              Since August 2025, I've been working full-time at <strong>ACR Fers
+              Aluminium</strong> in Ruaudin as Production, Communication, and Software
+              Development Manager. I combine my technical skills and creativity to
+              develop web solutions tailored to the company's needs.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>Personal Projects</h2>
+            <p>
+              In January 2025, I co-founded <strong>Collectif Pixel</strong>, an
+              association dedicated to tech and digital culture. With Kevin ALVES,
+              a friend I met at ekod, we host the <strong>Pixel Podcast</strong>
+              where we discuss development, tech, and our experiences in the field.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>Achievements</h2>
+            <p>
+              In 2025, I won the <strong>24h of Code</strong> with a student team
+              on the challenge presented by "Le Mans School of AI". I also participated
+              in Startup Weekend Le Mans in 2024 and returned as a mentor in 2025.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="info-card">
+            <h3>Information</h3>
+            <dl>
+              <dt>Location</dt>
+              <dd>Le Mans, France</dd>
+              <dt>Experience</dt>
+              <dd>3+ years</dd>
+              <dt>Specialty</dt>
+              <dd>Web Development</dd>
+              <dt>Status</dt>
+              <dd>Full-time - ACR Fers Aluminium</dd>
+            </dl>
+          </div>
+
+          <div class="info-card">
+            <h3>Contact</h3>
+            <a href="mailto:roserat.ugo@gmail.com" class="contact-link">
+                roserat.ugo@gmail.com
+            </a>
+            <div class="social-links">
+              <a href="https://github.com/roseratugo" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://www.linkedin.com/in/ugo-roserat/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-ink);
+    color: #ffffff;
+    padding: 8rem 1.5rem 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-hero {
+      padding: 10rem 3rem 6rem;
+    }
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+
+  .content-grid {
+    display: grid;
+    gap: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .content-grid {
+      grid-template-columns: 2fr 1fr;
+      gap: 5rem;
+    }
+  }
+
+  .main-content {
+    max-width: 650px;
+  }
+
+  .content-block {
+    margin-bottom: 3rem;
+  }
+
+  .content-block h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 1rem;
+  }
+
+  .content-block p {
+    color: var(--color-ink-light);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .content-block strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .info-card {
+    background-color: var(--color-paper-warm);
+    padding: 2rem;
+  }
+
+  .info-card h3 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .info-card dl {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .info-card dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-ink-muted);
+  }
+
+  .info-card dd {
+    color: var(--color-ink);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .contact-link {
+    display: block;
+    color: var(--color-ink);
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover {
+    color: var(--color-accent);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-links a {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-ink-light);
+    transition: color 0.2s;
+  }
+
+  .social-links a:hover {
+    color: var(--color-accent);
+  }
+</style>

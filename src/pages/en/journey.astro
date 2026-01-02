@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Timeline from '../../components/timeline/Timeline.astro';
+---
+
+<BaseLayout
+  title="Journey"
+  description="Discover my professional journey and education, from graphic arts to web development."
+>
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="label">Journey</span>
+      <h1 class="page-title">
+        My journey<span class="accent">.</span>
+      </h1>
+      <p class="page-intro">
+        From graphic arts to web development, a journey blending creativity and technology.
+      </p>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="page-content">
+    <div class="container">
+      <Timeline />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-ink);
+    color: #ffffff;
+    padding: 8rem 1.5rem 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-hero {
+      padding: 10rem 3rem 6rem;
+    }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+</style>

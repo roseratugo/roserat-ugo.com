@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="À propos"
+  description="Découvrez le parcours d'Ugo ROSERAT, développeur web passionné basé au Mans, de l'art graphique au code."
+>
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="label">À propos</span>
+      <h1 class="page-title">
+        De l'art graphique<br />au code<span class="accent">.</span>
+      </h1>
+      <p class="page-intro">
+        Je suis Ugo ROSERAT, développeur web de 23 ans basé au Mans. Mon parcours
+        atypique mêle formation artistique et développement logiciel, me permettant
+        d'avoir une vision unique sur les projets web.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="page-content">
+    <div class="container">
+      <div class="content-grid">
+        <!-- Main Content -->
+        <div class="main-content">
+          <div class="content-block">
+            <h2>Mon parcours</h2>
+            <p>
+              J'ai commencé par une formation artistique avec un <strong>CAP Signalétique
+              Décors Graphique</strong> (2018-2020) suivi d'un <strong>Brevet des Métiers
+              d'Art</strong> en art graphique et signalétique (2020-2022). Cette base
+              créative m'a donné une sensibilité particulière pour le design et
+              l'expérience utilisateur.
+            </p>
+            <p>
+              En 2022, j'ai entamé ma reconversion vers le développement web en intégrant
+              <strong>ekod</strong> en alternance chez ACR Fers Aluminium. J'ai obtenu mon
+              Bac+2 Développeur Web en 2024 et mon Bac+3 Concepteur d'application en 2025.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>Aujourd'hui</h2>
+            <p>
+              Depuis août 2025, je suis en CDI chez <strong>ACR Fers Aluminium</strong> à
+              Ruaudin en tant que Chargé de production, communication et développement
+              logiciel. Je combine mes compétences techniques et ma créativité pour
+              développer des solutions web adaptées aux besoins de l'entreprise.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>Mes projets personnels</h2>
+            <p>
+              En janvier 2025, j'ai co-fondé le <strong>Collectif Pixel</strong>, une
+              association dédiée à la tech et au numérique. Avec Kévin ALVES, un ami
+              rencontré à ekod, nous animons le <strong>Pixel Podcast</strong> où nous
+              discutons de développement, de tech et de nos expériences dans le domaine.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>Distinctions</h2>
+            <p>
+              En 2025, j'ai remporté les <strong>24h du Code</strong> en équipe étudiante
+              sur le sujet porté par "Le Mans School of AI". J'ai également participé au
+              Startup Weekend Le Mans en 2024 et j'y suis revenu en tant que mentor en 2025.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="info-card">
+            <h3>Informations</h3>
+            <dl>
+              <dt>Localisation</dt>
+              <dd>Le Mans, France</dd>
+              <dt>Expérience</dt>
+              <dd>3+ ans</dd>
+              <dt>Spécialité</dt>
+              <dd>Développement Web</dd>
+              <dt>Statut</dt>
+              <dd>CDI - ACR Fers Aluminium</dd>
+            </dl>
+          </div>
+
+          <div class="info-card">
+            <h3>Contact</h3>
+            <a href="mailto:roserat.ugo@gmail.com" class="contact-link">
+                roserat.ugo@gmail.com
+            </a>
+            <div class="social-links">
+              <a href="https://github.com/roseratugo" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://www.linkedin.com/in/ugo-roserat/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+
+  .content-grid {
+    display: grid;
+    gap: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .content-grid {
+      grid-template-columns: 2fr 1fr;
+      gap: 5rem;
+    }
+  }
+
+  .main-content {
+    max-width: 650px;
+  }
+
+  .content-block {
+    margin-bottom: 3rem;
+  }
+
+  .content-block h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 1rem;
+  }
+
+  .content-block p {
+    color: var(--color-ink-light);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .content-block strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .info-card {
+    background-color: var(--color-paper-warm);
+    padding: 2rem;
+  }
+
+  .info-card h3 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .info-card dl {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .info-card dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-ink-muted);
+  }
+
+  .info-card dd {
+    color: var(--color-ink);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .contact-link {
+    display: block;
+    color: var(--color-ink);
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover {
+    color: var(--color-accent);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-links a {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-ink-light);
+    transition: color 0.2s;
+  }
+
+  .social-links a:hover {
+    color: var(--color-accent);
+  }
+</style>

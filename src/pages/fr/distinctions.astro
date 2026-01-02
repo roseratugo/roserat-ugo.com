@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DistinctionCard from '../../components/distinctions/DistinctionCard.astro';
+import { getCollection } from 'astro:content';
+
+const distinctions = await getCollection('distinctions');
+const sortedDistinctions = distinctions.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout
+  title="Distinctions"
+  description="Mes distinctions, participations et récompenses dans les concours et événements tech."
+>
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="label">Distinctions</span>
+      <h1 class="page-title">
+        Réalisations<span class="accent">.</span>
+      </h1>
+      <p class="page-intro">
+        Concours, hackathons et événements auxquels j'ai participé ou contribué.
+      </p>
+    </div>
+  </section>
+
+  <!-- Distinctions -->
+  <section class="page-content">
+    <div class="container">
+      <div class="distinctions-grid" data-stagger>
+        {sortedDistinctions.map((distinction) => (
+          <DistinctionCard distinction={distinction.data} lang="fr" />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-ink);
+    color: #ffffff;
+    padding: 8rem 1.5rem 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-hero {
+      padding: 10rem 3rem 6rem;
+    }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+
+  .distinctions-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .distinctions-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

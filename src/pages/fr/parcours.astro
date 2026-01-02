@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Timeline from '../../components/timeline/Timeline.astro';
+---
+
+<BaseLayout
+  title="Parcours"
+  description="Découvrez mon parcours professionnel et ma formation, du CAP Signalétique au développement web."
+>
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="label">Parcours</span>
+      <h1 class="page-title">
+        Mon parcours<span class="accent">.</span>
+      </h1>
+      <p class="page-intro">
+        De l'art graphique au développement web, un parcours mêlant créativité et technique.
+      </p>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="page-content">
+    <div class="container">
+      <Timeline />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-ink);
+    color: #ffffff;
+    padding: 8rem 1.5rem 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-hero {
+      padding: 10rem 3rem 6rem;
+    }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+</style>

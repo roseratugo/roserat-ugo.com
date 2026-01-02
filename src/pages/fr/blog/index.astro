@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/blog/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.lang === 'fr' && !data.draft;
+});
+
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Articles sur le développement web, la tech et mes expériences professionnelles."
+>
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="label">Blog</span>
+      <h1 class="page-title">
+        Articles<span class="accent">.</span>
+      </h1>
+      <p class="page-intro">
+        Réflexions sur le développement web, la tech et mes expériences professionnelles.
+      </p>
+    </div>
+  </section>
+
+  <!-- Posts -->
+  <section class="page-content">
+    <div class="container">
+      {sortedPosts.length > 0 ? (
+        <div class="posts-list" data-stagger>
+          {sortedPosts.map((post) => (
+            <BlogCard post={post} lang="fr" />
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <p>Aucun article pour le moment. Revenez bientôt !</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-ink);
+    color: #ffffff;
+    padding: 8rem 1.5rem 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-hero {
+      padding: 10rem 3rem 6rem;
+    }
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--color-ink-muted);
+  }
+</style>

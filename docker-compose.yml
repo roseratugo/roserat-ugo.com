@@ -1,0 +1,9 @@
+services:
+  web:
+    image: ghcr.io/ugomusic/roserat-ugo.com:latest
+    container_name: roserat-ugo-portfolio
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"

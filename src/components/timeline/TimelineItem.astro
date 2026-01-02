@@ -1,0 +1,302 @@
+---
+import type { TimelineEntry } from '../../data/timeline';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  entry: TimelineEntry;
+  lang: Lang;
+  index: number;
+}
+
+const { entry, lang, index } = Astro.props;
+---
+
+<div class="timeline-item" data-timeline-item style={`--index: ${index}`}>
+  <!-- Timeline node -->
+  <div class="timeline-node">
+    <div class="node-dot">
+      <div class="node-pulse"></div>
+    </div>
+    <div class="node-year">{entry.period[lang].split(' ')[0]}</div>
+  </div>
+
+  <!-- Content card -->
+  <div class="timeline-card">
+    <div class="card-glow"></div>
+
+    <div class="card-header">
+      <span class="card-period">{entry.period[lang]}</span>
+      {entry.current && (
+        <span class="card-badge">{lang === 'fr' ? 'Actuel' : 'Current'}</span>
+      )}
+    </div>
+
+    <h3 class="card-title">
+      <span class="title-text">{entry.title[lang]}</span>
+    </h3>
+
+    <div class="card-org">
+      <span class="org-name">{entry.organization}</span>
+      {entry.location && (
+        <span class="org-location">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="14" height="14">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+          </svg>
+          {entry.location}
+        </span>
+      )}
+    </div>
+
+    <p class="card-desc">{entry.description[lang]}</p>
+
+    <div class="card-footer">
+      <div class="footer-line"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: slideIn 0.6s ease forwards;
+    animation-delay: calc(var(--index) * 0.15s);
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .timeline-node {
+    position: absolute;
+    left: -3rem;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-node {
+      left: -4rem;
+    }
+  }
+
+  .node-dot {
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 4px var(--color-paper), 0 0 20px color-mix(in srgb, var(--color-accent) 30%, transparent);
+  }
+
+  .node-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent);
+    opacity: 0;
+    animation: pulse 2s ease-out infinite;
+    animation-delay: calc(var(--index) * 0.3s);
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  .node-year {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-ink-muted);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 0.1em;
+  }
+
+  .timeline-card {
+    position: relative;
+    background-color: var(--color-paper);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 2rem;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .timeline-card:hover {
+    transform: translateY(-4px) translateX(4px);
+    border-color: color-mix(in srgb, var(--color-accent) 20%, transparent);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.05),
+      0 0 0 1px color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+
+  .card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .timeline-card:hover .card-glow {
+    transform: scaleX(1);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-period {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.75rem;
+    background-color: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  }
+
+  .card-badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--color-accent);
+    animation: badgePulse 2s ease infinite;
+  }
+
+  @keyframes badgePulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 40%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 0 8px transparent;
+    }
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+
+  .title-text {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  .timeline-card:hover .title-text {
+    transform: translateX(4px);
+  }
+
+  .card-org {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .org-name {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink-light);
+  }
+
+  .org-location {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--color-ink-muted);
+  }
+
+  .card-desc {
+    font-size: 0.9375rem;
+    color: var(--color-ink-light);
+    line-height: 1.7;
+  }
+
+  .card-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    position: relative;
+  }
+
+  .footer-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: color-mix(in srgb, var(--color-accent) 20%, transparent);
+    transition: width 0.4s ease;
+  }
+
+  .timeline-card:hover .footer-line {
+    width: 80px;
+    background-color: var(--color-accent);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animate each timeline item on scroll
+  document.querySelectorAll('[data-timeline-item]').forEach((item, index) => {
+    gsap.fromTo(
+      item,
+      {
+        opacity: 0,
+        x: -30,
+      },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  });
+</script>

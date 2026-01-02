@@ -1,0 +1,72 @@
+---
+import { getLangFromUrl, getLocalizedPath, type Lang } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+
+const languages: { code: Lang; label: string }[] = [
+  { code: 'fr', label: 'FR' },
+  { code: 'en', label: 'EN' },
+];
+---
+
+<div class="lang-switcher">
+  {languages.map((lang, i) => {
+    const isActive = lang.code === currentLang;
+    const href = getLocalizedPath(currentPath, lang.code);
+
+    return (
+      <>
+        <a
+          href={href}
+          class:list={[
+            'lang-link',
+            isActive && 'active',
+          ]}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          {lang.label}
+        </a>
+        {i < languages.length - 1 && (
+          <span class="lang-divider">/</span>
+        )}
+      </>
+    );
+  })}
+</div>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
+
+  .lang-link {
+    padding: 0.25rem 0.5rem;
+    color: var(--color-paper);
+    opacity: 0.4;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+
+  .lang-link:hover,
+  .lang-link.active {
+    opacity: 1;
+  }
+
+  .lang-divider {
+    color: var(--color-paper);
+    opacity: 0.2;
+    transition: color 0.3s ease;
+  }
+
+  :global(.header.on-light) .lang-link {
+    color: var(--color-ink);
+  }
+
+  :global(.header.on-light) .lang-divider {
+    color: var(--color-ink);
+  }
+</style>

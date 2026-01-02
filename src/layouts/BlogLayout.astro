@@ -1,0 +1,299 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  post: {
+    data: {
+      title: string;
+      description: string;
+      pubDate: Date;
+      updatedDate?: Date;
+      heroImage?: ImageMetadata;
+      tags: string[];
+    };
+  };
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const lang = getLangFromUrl(Astro.url);
+
+const formattedPubDate = data.pubDate.toLocaleDateString(
+  lang === 'fr' ? 'fr-FR' : 'en-US',
+  { year: 'numeric', month: 'long', day: 'numeric' }
+);
+
+const formattedUpdatedDate = data.updatedDate?.toLocaleDateString(
+  lang === 'fr' ? 'fr-FR' : 'en-US',
+  { year: 'numeric', month: 'long', day: 'numeric' }
+);
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  type="article"
+  publishedTime={data.pubDate}
+  modifiedTime={data.updatedDate}
+>
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <a href={`/${lang}/blog`} class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        {lang === 'fr' ? 'Retour au blog' : 'Back to blog'}
+      </a>
+
+      <!-- Tags -->
+      {data.tags.length > 0 && (
+        <div class="tags-list">
+          {data.tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      )}
+
+      <h1 class="page-title">{data.title}</h1>
+
+      <div class="meta">
+        <time datetime={data.pubDate.toISOString()}>
+          {lang === 'fr' ? 'Publié le' : 'Published on'} {formattedPubDate}
+        </time>
+        {data.updatedDate && (
+          <span class="updated">
+            • {lang === 'fr' ? 'Mis à jour le' : 'Updated on'} {formattedUpdatedDate}
+          </span>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <article class="page-content">
+    <div class="container">
+      <!-- Hero image -->
+      {data.heroImage && (
+        <div class="hero-image">
+          <img src={data.heroImage.src} alt={data.title} />
+        </div>
+      )}
+
+      <!-- Article content -->
+      <div class="prose">
+        <slot />
+      </div>
+
+      <!-- Footer -->
+      <footer class="article-footer">
+        <a href={`/${lang}/blog`} class="footer-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+          {lang === 'fr' ? 'Tous les articles' : 'All posts'}
+        </a>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background-color: var(--color-ink);
+    color: #ffffff;
+    padding: 8rem 1.5rem 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-hero {
+      padding: 10rem 3rem 6rem;
+    }
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 2rem;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #ffffff;
+  }
+
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .updated {
+    margin-left: 0.25rem;
+  }
+
+  .page-content {
+    padding: 5rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-content {
+      padding: 6rem 3rem;
+    }
+  }
+
+  .hero-image {
+    margin-bottom: 3rem;
+    overflow: hidden;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .prose {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--color-ink-light);
+  }
+
+  .prose :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose :global(a:hover) {
+    text-decoration: none;
+  }
+
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    padding: 0.125rem 0.375rem;
+    background-color: var(--color-paper-warm);
+    border-radius: 2px;
+  }
+
+  .prose :global(pre) {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    padding: 1.5rem;
+    background-color: var(--color-ink);
+    color: rgba(255, 255, 255, 0.9);
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(pre code) {
+    padding: 0;
+    background: none;
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1.5rem;
+    font-style: italic;
+    color: var(--color-ink-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(img) {
+    width: 100%;
+    height: auto;
+    margin: 2rem 0;
+  }
+
+  .prose :global(strong) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .article-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    transition: gap 0.2s ease;
+  }
+
+  .footer-link:hover {
+    gap: 0.75rem;
+  }
+</style>

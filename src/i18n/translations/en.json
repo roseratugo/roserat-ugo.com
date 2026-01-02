@@ -1,0 +1,65 @@
+{
+  "site": {
+    "title": "Ugo ROSERAT",
+    "description": "Passionate Web Developer, creator of Collectif Pixel and co-host of Pixel Podcast"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "journey": "Journey",
+    "projects": "Projects",
+    "blog": "Blog",
+    "distinctions": "Distinctions"
+  },
+  "home": {
+    "greeting": "Hi, I'm",
+    "name": "Ugo ROSERAT",
+    "role": "Web Developer",
+    "description": "Passionate about web application development, creator of Collectif Pixel and co-host of Pixel Podcast.",
+    "cta": {
+      "projects": "View my projects",
+      "contact": "Contact me"
+    }
+  },
+  "about": {
+    "title": "About",
+    "intro": "I'm a 23-year-old web developer based in Le Mans, France, combining graphic creativity with software development.",
+    "current": "Currently working full-time at ACR Fers Aluminium as Production, Communication and Software Development Manager."
+  },
+  "journey": {
+    "title": "My Journey",
+    "education": "Education",
+    "experience": "Experience",
+    "present": "Present"
+  },
+  "projects": {
+    "title": "Projects",
+    "viewProject": "View project",
+    "viewCode": "View code",
+    "technologies": "Technologies"
+  },
+  "blog": {
+    "title": "Blog",
+    "readMore": "Read more",
+    "publishedOn": "Published on",
+    "updatedOn": "Updated on",
+    "minRead": "min read",
+    "allPosts": "All posts",
+    "tags": "Tags"
+  },
+  "distinctions": {
+    "title": "Distinctions",
+    "winner": "Winner",
+    "participant": "Participant",
+    "mentor": "Mentor",
+    "organizer": "Organizer"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "madeWith": "Made with"
+  },
+  "common": {
+    "backHome": "Back to home",
+    "loading": "Loading..."
+  }
+}

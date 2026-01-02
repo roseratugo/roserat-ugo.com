@@ -1,0 +1,320 @@
+---
+import Navigation from './Navigation.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<header class="header">
+  <div class="container-wide">
+    <div class="header-inner">
+      <!-- Logo -->
+      <a href={`/${lang}/`} class="logo">
+        <span class="logo-text">
+          <span class="logo-char">U</span>
+          <span class="logo-char">g</span>
+          <span class="logo-char">o</span>
+          <span class="logo-dot">.</span>
+          <span class="logo-char">R</span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="header-nav">
+        <Navigation />
+        <div class="nav-divider"></div>
+        <LanguageSwitcher />
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="mobile-btn" aria-label="Menu">
+        <span class="menu-line"></span>
+        <span class="menu-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu">
+  <div class="mobile-menu-inner">
+    <nav class="mobile-nav">
+      {[
+        { href: `/${lang}/`, label: lang === 'fr' ? 'Accueil' : 'Home', num: '01' },
+        { href: `/${lang}/${lang === 'fr' ? 'a-propos' : 'about'}`, label: lang === 'fr' ? 'À propos' : 'About', num: '02' },
+        { href: `/${lang}/${lang === 'fr' ? 'parcours' : 'journey'}`, label: lang === 'fr' ? 'Parcours' : 'Journey', num: '03' },
+        { href: `/${lang}/${lang === 'fr' ? 'projets' : 'projects'}`, label: lang === 'fr' ? 'Projets' : 'Projects', num: '04' },
+        { href: `/${lang}/blog`, label: 'Blog', num: '05' },
+        { href: `/${lang}/distinctions`, label: 'Distinctions', num: '06' },
+      ].map((item, i) => (
+        <a href={item.href} class="mobile-link" style={`--i: ${i}`}>
+          <span class="mobile-num">{item.num}</span>
+          <span class="mobile-label">{item.label}</span>
+        </a>
+      ))}
+    </nav>
+    <div class="mobile-footer">
+      <LanguageSwitcher />
+    </div>
+  </div>
+</div>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    mix-blend-mode: difference;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .header-inner {
+      height: 6rem;
+    }
+  }
+
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    color: var(--color-paper);
+  }
+
+  .logo-text {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: flex;
+  }
+
+  .logo-char {
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .logo:hover .logo-char {
+    animation: logoJump 0.4s ease forwards;
+    animation-delay: calc(var(--i, 0) * 0.05s);
+  }
+
+  .logo-char:nth-child(1) { --i: 0; }
+  .logo-char:nth-child(2) { --i: 1; }
+  .logo-char:nth-child(3) { --i: 2; }
+  .logo-char:nth-child(5) { --i: 3; }
+
+  @keyframes logoJump {
+    0%, 100% { transform: translateY(0); color: inherit; }
+    50% { transform: translateY(-6px); color: var(--color-accent); }
+  }
+
+  .logo-dot {
+    color: var(--color-accent);
+    display: inline-block;
+    transition: transform 0.3s ease;
+    margin: 0 1px;
+  }
+
+  .logo:hover .logo-dot {
+    transform: scale(1.5);
+  }
+
+  /* Header Nav */
+  .header-nav {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .header-nav {
+      display: flex;
+    }
+  }
+
+  .nav-divider {
+    width: 1px;
+    height: 1.25rem;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Mobile Button */
+  .mobile-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-btn {
+      display: none;
+    }
+  }
+
+  .menu-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-paper);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  :global(.menu-open) .menu-line:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  :global(.menu-open) .menu-line:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: var(--color-ink);
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.menu-open) .mobile-menu {
+    transform: translateX(0);
+  }
+
+  @media (min-width: 768px) {
+    .mobile-menu {
+      display: none;
+    }
+  }
+
+  .mobile-menu-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-paper);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition-delay: calc(var(--i) * 0.05s + 0.1s);
+  }
+
+  :global(.menu-open) .mobile-link {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mobile-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+  }
+
+  .mobile-label {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .mobile-footer {
+    margin-top: 3rem;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.4s;
+  }
+
+  :global(.menu-open) .mobile-footer {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+
+  btn?.addEventListener('click', () => {
+    document.body.classList.toggle('menu-open');
+    document.body.style.overflow = document.body.classList.contains('menu-open') ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('#mobile-menu a').forEach((link) => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove('menu-open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Detect background color and switch nav accent
+  const header = document.querySelector('.header') as HTMLElement;
+  const nav = document.querySelector('.header-nav') as HTMLElement;
+
+  const updateNavColor = () => {
+    if (!header || !nav) return;
+
+    const headerRect = header.getBoundingClientRect();
+    const headerMiddle = headerRect.top + headerRect.height / 2;
+
+    // Find element at header position
+    const elementsAtPoint = document.elementsFromPoint(window.innerWidth / 2, headerMiddle);
+
+    // Check if any element has a light background
+    let isOnLightBg = false;
+    for (const el of elementsAtPoint) {
+      if (el === header || el.closest('.header')) continue;
+      const bg = window.getComputedStyle(el).backgroundColor;
+      if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+        // Parse RGB values
+        const match = bg.match(/\d+/g);
+        if (match) {
+          const [r, g, b] = match.map(Number);
+          // Calculate luminance
+          const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+          isOnLightBg = luminance > 0.6;
+          break;
+        }
+      }
+    }
+
+    if (isOnLightBg) {
+      nav.style.setProperty('--nav-accent', 'var(--color-gold)');
+      nav.style.setProperty('--nav-accent-light', 'var(--color-gold-light)');
+    } else {
+      nav.style.setProperty('--nav-accent', 'var(--color-accent)');
+      nav.style.setProperty('--nav-accent-light', 'var(--color-accent-light)');
+    }
+  };
+
+  // Run on scroll and load
+  window.addEventListener('scroll', updateNavColor, { passive: true });
+  window.addEventListener('load', updateNavColor);
+  document.addEventListener('astro:page-load', updateNavColor);
+  updateNavColor();
+</script>
