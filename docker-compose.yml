@@ -5,8 +5,6 @@ services:
     networks:
       - proxy_net
     restart: unless-stopped
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
 
 networks:
   proxy_net:
