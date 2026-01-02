@@ -5,8 +5,6 @@ services:
     networks:
       - proxy_net
     restart: unless-stopped
-    ports:
-      - "3000:80"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
